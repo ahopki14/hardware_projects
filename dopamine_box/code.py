@@ -1,13 +1,10 @@
-# Itsy Bitsy M0 Express IO demo
-# Welcome to CircuitPython 2.2 :)xz
-
 import board
 import gc
 import time
 import neopixel
 from digitalio import DigitalInOut, Direction, Pull
 
-gc.collect()   # make some rooooom
+gc.collect()
 
 #debug
 debug=True
