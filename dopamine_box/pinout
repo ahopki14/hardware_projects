@@ -1,0 +1,10 @@
+D3:	Neopixel Data
+3V:	Neopixel+
+D2:	Reset Switch
+D4:	Switch 1
+D7:	Switch 2
+D10:	Switch 3
+D11:	Switch 4
+D12:	Switch 5
+D13:	Switch 6
+Grd: 	Neopixel-, All switches
