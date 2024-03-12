@@ -9,10 +9,7 @@ def to_julian_date_2000(dt):
     return tt
 
 def to_julian_date(dt):
-    """ Converts to Julian Date
-    """
-    tt = (dt - datetime(2000, 1, 1, 12)).total_seconds() / 86400
-    return tt + 2451545.0
+    return to_julian_date_2000(dt) + 2451545.0
 
 
 
@@ -33,15 +30,15 @@ def solar_ra_dec(jd):
 
 def constrain(x):
     if x<0:
-        x=x+1
+        x=float(x)+1.0
     elif x>1:
-        x=x-1
-    return x
+        x=float(x)-1.0
+    return round(x,4)
 
 
 def dec_to_time(t):
-    h=floor(de)
-    me=60*(de-h)
+    h=floor(t)
+    me=60*(t-h)
     m=floor(me)
     se=60*(me-m)
     s=floor(se)
@@ -57,8 +54,16 @@ def degrees_to_time(d):
 
 
 #Caclulate sunset time
-def sunset_time(ra,dec,jd0,lat,lon):
-    h=-0.8333 #apparent sun set angle using standard refraction model
+def sunset_time(jd0,lat,lon,h=-0.8333):
+    """ Return the Rise/Set Time for a given date
+
+    Keyword Arguments:
+    jd0 -- Julian Date at 0hUTC on date
+    lat -- Latitude
+    lon -- Longitude
+    h   -- apparent sun set angle using a refraction model
+    """
+    ra,dec=solar_ra_dec(jd0)
     cosH=(sin(radians(h))-sin(radians(lat))*sin(radians(dec)))/(cos(radians(lat))*cos(radians(dec)))
     if cosH<-1 or cosH>1:
         print("Error: no sunrise/set. Are you in the arctic circle?")
