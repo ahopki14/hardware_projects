@@ -74,8 +74,8 @@ def sunset_time(jd0,lat,lon,h=-0.8333):
     #Sideral Angle at Greenwich UTC0 Today
     Th=(280.46061837 + 360.98564736629*jd0 + 0.000387933*T**2 - (T**3)/38710000.0)%360
 
-    transit=(dec+(-lon)-Th)/360
+    transit=(ra+(-lon)-Th)/360
     rise=constrain(transit-(degrees(H)/360))*24
     sset=constrain(transit+(degrees(H)/360))*24
-    return (rise,sset)
+    return (dec_to_time(rise),dec_to_time(sset))
 

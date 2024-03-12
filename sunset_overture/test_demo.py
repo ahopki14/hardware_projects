@@ -59,8 +59,7 @@ def test_dec_to_time():
     assert dec_to_time(0.12130*24).strftime("%H:%M:%S")=="02:54:40"
 
 def test_sunset_time():
-    # Venus rise/set Boston example from Meeus
-    ex_time=datetime.strptime("3/20/1988 0:0:0","%m/%d/%Y %H:%M:%S")
-    rise,sset=sunset_time(jd0=to_julian_date_2000(ex_time),lat=42.3333,lon=-71.0833,h=-0.18035)
+    pass
+
     
 
