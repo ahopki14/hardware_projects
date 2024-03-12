@@ -40,7 +40,6 @@ def constrain(x):
 
 
 def dec_to_time(t):
-    de=t*24
     h=floor(de)
     me=60*(de-h)
     m=floor(me)
@@ -58,7 +57,7 @@ def degrees_to_time(d):
 
 
 #Caclulate sunset time
-def sunset_time(ra,dec,jd,jd0,lat,lon):
+def sunset_time(ra,dec,jd0,lat,lon):
     h=-0.8333 #apparent sun set angle using standard refraction model
     cosH=(sin(radians(h))-sin(radians(lat))*sin(radians(dec)))/(cos(radians(lat))*cos(radians(dec)))
     if cosH<-1 or cosH>1:
@@ -71,21 +70,7 @@ def sunset_time(ra,dec,jd,jd0,lat,lon):
     Th=(280.46061837 + 360.98564736629*jd0 + 0.000387933*T**2 - (T**3)/38710000.0)%360
 
     transit=(dec+(-lon)-Th)/360
-    rise=transit-(degrees(H)/360)
-    sset=transit+(degrees(H)/360)
+    rise=constrain(transit-(degrees(H)/360))*24
+    sset=constrain(transit+(degrees(H)/360))*24
     return (rise,sset)
 
-
-#First, Approximate the sunset time using the **current** RA/Dec
-
-#get current UTC
-#jd=to_julian_date_2000(test_now)
-#jd0=to_julian_date_2000(test_0h)
-#
-#approx_ra_dec=solar_ra_dec(jd)
-#approx_time=sunset_time(approx_ra, approx_dec)
-
-#Recalculate using RA/Dec at approximated sunset time
-#ra=solar_ra(approx_time)
-#dec=solar_dec(approx_time)
-#sunset=sunset_time(ra,dec)
